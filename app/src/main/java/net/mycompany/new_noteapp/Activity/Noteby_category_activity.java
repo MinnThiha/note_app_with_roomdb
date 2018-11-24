@@ -12,15 +12,12 @@ import android.widget.TextView;
 
 import net.mycompany.new_noteapp.Adapters.CategoryAdapter;
 import net.mycompany.new_noteapp.Adapters.NoteAdapter;
-import net.mycompany.new_noteapp.Delegate.CategoryDelegate;
 import net.mycompany.new_noteapp.Delegate.NoteCallBack;
 import net.mycompany.new_noteapp.Local_DB.Database.note_db;
 import net.mycompany.new_noteapp.Local_DB.Entity.Category;
 import net.mycompany.new_noteapp.Local_DB.Entity.Note;
 import net.mycompany.new_noteapp.R;
 import net.mycompany.new_noteapp.Utils.Appconstant;
-
-import java.util.Collections;
 import java.util.List;
 
 

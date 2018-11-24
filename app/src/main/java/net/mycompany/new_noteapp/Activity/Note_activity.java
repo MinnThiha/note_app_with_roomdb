@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +27,7 @@ public class Note_activity extends AppCompatActivity{
     Button btn_cat,btn_add;
     note_db db;
     ChoiceAdapter cad;
+    int cid=0;
     int id=0;
     Boolean isUpdate=false;
 
@@ -48,6 +50,7 @@ public class Note_activity extends AppCompatActivity{
                 etTitle.setText(note.getTitle());
                 etDesc.setText(note.getDesc());
                 etCat.setText("");
+                id=note.getId();
             }
         }
 
@@ -64,12 +67,13 @@ public class Note_activity extends AppCompatActivity{
                 new LovelyChoiceDialog(Note_activity.this)
                         .setTopColorRes(R.color.colorPrimary)
                         .setTitle("Choice Category")
+                        .setTitleGravity(Gravity.CENTER)
                         .setItems(cad, new LovelyChoiceDialog.OnItemSelectedListener<Category>() {
                     @Override
                     public void onItemSelected(int position, Category item) {
                         etCat.setText(item.getCat_Name());
                         item.getId();
-                        id=item.getId();
+                        cid=item.getId();
                     }
                 }).show();
             }
@@ -88,14 +92,17 @@ public class Note_activity extends AppCompatActivity{
                 String date=year+"/"+month+"/"+day;
 
                 if(isUpdate){
-                    Note n=new Note(title,des,date,id);
+                    Note n=new Note(title,des,date,cid);
+                    n.setId(id);
                     db.getNoteDao().updateNote(n);
+                    finish();
                 }
                 else {
-                    Note n=new Note(title,des,date,id);
+                    Note n=new Note(title,des,date,cid);
                     db.getNoteDao().insertNote(n);
+                    finish();
                 }
-                finish();
+
 
             }
         });
